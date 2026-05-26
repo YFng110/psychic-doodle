@@ -1,4 +1,4 @@
-import type { Employee, AttendanceRecord, LeaveRequest, SalaryRecord, Job, Candidate, Interview, PerformanceReview, KpiItem, Customer, Contact, FollowUp, Opportunity, Contract } from '../types'
+import type { Employee, AttendanceRecord, LeaveRequest, SalaryRecord, Job, Candidate, Interview, PerformanceReview, KpiItem, Customer, Contact, FollowUp, Opportunity, Contract, Invoice, Payment, ExpenseReport, Budget, Project, Milestone, Task, TimeEntry } from '../types'
 
 let idCounter = 0
 function uid(prefix: string): string {
@@ -183,4 +183,80 @@ export const mockContracts: Contract[] = [
   { id: uid('CTR'), customerId: mockCustomers[0].id, customerName: '字节科技', opportunityId: mockOpportunities[0].id, name: '前端架构升级服务合同', amount: 300000, startDate: '2026-07-01', endDate: '2027-01-01', status: '待审批', signedAt: '' },
   { id: uid('CTR'), customerId: mockCustomers[6].id, customerName: '创想制造', opportunityId: '', name: '智能制造咨询服务合同', amount: 400000, startDate: '2026-06-01', endDate: '2026-12-01', status: '草稿', signedAt: '' },
   { id: uid('CTR'), customerId: mockCustomers[5].id, customerName: '云帆医疗', opportunityId: mockOpportunities[5].id, name: 'HIS系统升级合同', amount: 600000, startDate: '2025-12-01', endDate: '2026-06-01', status: '已到期', signedAt: '2025-11-15' },
+]
+
+// === Finance Mock 数据 ===
+
+export const mockInvoices: Invoice[] = [
+  { id: uid('INV'), type: '应收', customerId: mockCustomers[0].id, customerName: '字节科技', supplierName: '', invoiceNumber: 'INV-2026-001', amount: 300000, taxRate: 6, taxAmount: 18000, totalAmount: 318000, currency: 'CNY', issueDate: '2026-05-01', dueDate: '2026-07-01', status: '已发送', notes: '前端架构升级项目首期款' },
+  { id: uid('INV'), type: '应收', customerId: mockCustomers[3].id, customerName: '智慧教育', supplierName: '', invoiceNumber: 'INV-2026-002', amount: 200000, taxRate: 6, taxAmount: 12000, totalAmount: 212000, currency: 'CNY', issueDate: '2026-04-15', dueDate: '2026-06-15', status: '已收款', notes: '在线教育平台二期' },
+  { id: uid('INV'), type: '应收', customerId: mockCustomers[6].id, customerName: '创想制造', supplierName: '', invoiceNumber: 'INV-2026-003', amount: 800000, taxRate: 6, taxAmount: 48000, totalAmount: 848000, currency: 'CNY', issueDate: '2026-05-10', dueDate: '2026-08-10', status: '草稿', notes: 'MES系统集成' },
+  { id: uid('INV'), type: '应收', customerId: mockCustomers[1].id, customerName: '星辰金融', supplierName: '', invoiceNumber: 'INV-2026-004', amount: 50000, taxRate: 6, taxAmount: 3000, totalAmount: 53000, currency: 'USD', issueDate: '2026-05-20', dueDate: '2026-07-20', status: '已发送', notes: '风控系统咨询费' },
+  { id: uid('INV'), type: '应付', customerId: '', customerName: '', supplierName: '云服务科技有限公司', invoiceNumber: 'INV-2026-005', amount: 45000, taxRate: 6, taxAmount: 2700, totalAmount: 47700, currency: 'CNY', issueDate: '2026-05-15', dueDate: '2026-06-15', status: '已开具', notes: '云服务器年费' },
+  { id: uid('INV'), type: '应付', customerId: '', customerName: '', supplierName: '办公设备租赁公司', invoiceNumber: 'INV-2026-006', amount: 12000, taxRate: 6, taxAmount: 720, totalAmount: 12720, currency: 'CNY', issueDate: '2026-05-01', dueDate: '2026-06-01', status: '已付款', notes: '办公设备季度租赁费' },
+  { id: uid('INV'), type: '应收', customerId: mockCustomers[2].id, customerName: '绿源环保', supplierName: '', invoiceNumber: 'INV-2026-007', amount: 150000, taxRate: 6, taxAmount: 9000, totalAmount: 159000, currency: 'CNY', issueDate: '2026-05-18', dueDate: '2026-08-18', status: '已开具', notes: '碳排放管理系统' },
+  { id: uid('INV'), type: '应收', customerId: mockCustomers[5].id, customerName: '云帆医疗', supplierName: '', invoiceNumber: 'INV-2026-008', amount: 600000, taxRate: 6, taxAmount: 36000, totalAmount: 636000, currency: 'CNY', issueDate: '2025-12-01', dueDate: '2026-03-01', status: '已逾期', notes: 'HIS系统升级' },
+]
+
+export const mockPayments: Payment[] = [
+  { id: uid('PAY'), invoiceId: mockInvoices[1].id, invoiceNumber: 'INV-2026-002', customerId: mockCustomers[3].id, customerName: '智慧教育', amount: 212000, paymentDate: '2026-05-20', paymentMethod: '银行转账', currency: 'CNY', exchangeRate: 1, notes: '在线教育平台二期全款' },
+  { id: uid('PAY'), invoiceId: mockInvoices[5].id, invoiceNumber: 'INV-2026-006', customerId: '', customerName: '', amount: 12720, paymentDate: '2026-05-15', paymentMethod: '银行转账', currency: 'CNY', exchangeRate: 1, notes: '办公设备租赁付款' },
+  { id: uid('PAY'), invoiceId: mockInvoices[0].id, invoiceNumber: 'INV-2026-001', customerId: mockCustomers[0].id, customerName: '字节科技', amount: 100000, paymentDate: '2026-05-25', paymentMethod: '银行转账', currency: 'CNY', exchangeRate: 1, notes: '首期款部分收款' },
+  { id: uid('PAY'), invoiceId: mockInvoices[3].id, invoiceNumber: 'INV-2026-004', customerId: mockCustomers[1].id, customerName: '星辰金融', amount: 53000, paymentDate: '2026-05-22', paymentMethod: '支付宝', currency: 'USD', exchangeRate: 7.21, notes: '咨询费' },
+]
+
+export const mockExpenses: ExpenseReport[] = [
+  { id: uid('EXP'), employeeId: mockEmployees[0].id, employeeName: '张三', type: '差旅', amount: 3500, date: '2026-05-15', description: '上海客户拜访差旅费（机票+酒店+餐饮）', status: '待审批', approverId: '', approverName: '', approvedAt: '' },
+  { id: uid('EXP'), employeeId: mockEmployees[2].id, employeeName: '王五', type: '招待', amount: 1200, date: '2026-05-18', description: '字节科技客户招待晚餐', status: '已通过', approverId: mockEmployees[5].id, approverName: '周八', approvedAt: '2026-05-20' },
+  { id: uid('EXP'), employeeId: mockEmployees[4].id, employeeName: '孙七', type: '办公', amount: 800, date: '2026-05-10', description: '购买办公用品（笔记本、文具）', status: '已通过', approverId: mockEmployees[5].id, approverName: '周八', approvedAt: '2026-05-12' },
+  { id: uid('EXP'), employeeId: mockEmployees[1].id, employeeName: '李四', type: '差旅', amount: 5200, date: '2026-05-20', description: '广州技术交流会参会费用', status: '待审批', approverId: '', approverName: '', approvedAt: '' },
+  { id: uid('EXP'), employeeId: mockEmployees[8].id, employeeName: '冯十一', type: '其他', amount: 500, date: '2026-05-22', description: '团队团建活动零食采购', status: '已拒绝', approverId: mockEmployees[5].id, approverName: '周八', approvedAt: '2026-05-23' },
+]
+
+export const mockBudgets: Budget[] = [
+  { id: uid('BUD'), year: '2026', department: '技术部', category: '部门预算', projectId: '', projectName: '', totalAmount: 500000, usedAmount: 320000 },
+  { id: uid('BUD'), year: '2026', department: '产品部', category: '部门预算', projectId: '', projectName: '', totalAmount: 300000, usedAmount: 180000 },
+  { id: uid('BUD'), year: '2026', department: '销售部', category: '部门预算', projectId: '', projectName: '', totalAmount: 400000, usedAmount: 150000 },
+  { id: uid('BUD'), year: '2026', department: '市场部', category: '部门预算', projectId: '', projectName: '', totalAmount: 250000, usedAmount: 220000 },
+  { id: uid('BUD'), year: '2026', department: '', category: '项目预算', projectId: '', projectName: '前端架构升级项目', totalAmount: 100000, usedAmount: 45000 },
+  { id: uid('BUD'), year: '2026', department: '', category: '项目预算', projectId: '', projectName: 'MES系统集成', totalAmount: 300000, usedAmount: 80000 },
+]
+
+// === Project Mock 数据 ===
+
+export const mockProjects: Project[] = [
+  { id: uid('PRJ'), name: '前端架构升级项目', description: '为客户字节科技进行前端技术架构全面升级', customerId: mockCustomers[0].id, customerName: '字节科技', managerId: mockEmployees[0].id, managerName: '张三', members: [mockEmployees[0].id, mockEmployees[1].id], memberNames: ['张三', '李四'], startDate: '2026-03-01', endDate: '2026-09-30', budget: 300000, status: '进行中' },
+  { id: uid('PRJ'), name: 'MES系统集成项目', description: '为创想制造实施MES生产执行系统', customerId: mockCustomers[6].id, customerName: '创想制造', managerId: mockEmployees[1].id, managerName: '李四', members: [mockEmployees[1].id, mockEmployees[6].id, mockEmployees[7].id], memberNames: ['李四', '吴九', '郑十'], startDate: '2026-05-01', endDate: '2026-12-31', budget: 800000, status: '进行中' },
+  { id: uid('PRJ'), name: '内部OA系统升级', description: '公司内部OA系统重构升级，提升办公效率', customerId: '', customerName: '', managerId: mockEmployees[2].id, managerName: '王五', members: [mockEmployees[0].id, mockEmployees[2].id, mockEmployees[8].id], memberNames: ['张三', '王五', '冯十一'], startDate: '2026-06-01', endDate: '2026-10-31', budget: 200000, status: '筹备中' },
+  { id: uid('PRJ'), name: '碳排放管理系统', description: '为绿源环保开发碳排放监测管理平台', customerId: mockCustomers[2].id, customerName: '绿源环保', managerId: mockEmployees[4].id, managerName: '孙七', members: [mockEmployees[4].id, mockEmployees[8].id], memberNames: ['孙七', '冯十一'], startDate: '2026-04-01', endDate: '2026-08-31', budget: 150000, status: '进行中' },
+]
+
+export const mockMilestones: Milestone[] = [
+  { id: uid('MST'), projectId: mockProjects[0].id, name: '需求调研完成', deadline: '2026-04-01', status: '已完成' },
+  { id: uid('MST'), projectId: mockProjects[0].id, name: '技术方案评审', deadline: '2026-05-15', status: '已完成' },
+  { id: uid('MST'), projectId: mockProjects[0].id, name: '核心模块开发', deadline: '2026-07-01', status: '进行中' },
+  { id: uid('MST'), projectId: mockProjects[0].id, name: 'UAT验收', deadline: '2026-09-15', status: '待开始' },
+  { id: uid('MST'), projectId: mockProjects[1].id, name: '工厂调研', deadline: '2026-05-15', status: '已完成' },
+  { id: uid('MST'), projectId: mockProjects[1].id, name: '系统设计', deadline: '2026-06-30', status: '进行中' },
+  { id: uid('MST'), projectId: mockProjects[1].id, name: '系统上线', deadline: '2026-12-15', status: '待开始' },
+]
+
+export const mockTasks: Task[] = [
+  { id: uid('TSK'), projectId: mockProjects[0].id, milestoneId: mockMilestones[2].id, name: '路由模块重构', description: '重构前端路由架构，支持权限控制', assigneeId: mockEmployees[0].id, assigneeName: '张三', priority: '高', status: '进行中', startDate: '2026-05-15', dueDate: '2026-06-10', estimatedHours: 80, actualHours: 30 },
+  { id: uid('TSK'), projectId: mockProjects[0].id, milestoneId: mockMilestones[2].id, name: 'API中间件开发', description: '开发请求拦截和响应处理中间件', assigneeId: mockEmployees[1].id, assigneeName: '李四', priority: '高', status: '待办', startDate: '2026-06-01', dueDate: '2026-06-20', estimatedHours: 60, actualHours: 0 },
+  { id: uid('TSK'), projectId: mockProjects[0].id, milestoneId: mockMilestones[2].id, name: '组件库升级', description: '升级Element Plus到最新版本并兼容测试', assigneeId: mockEmployees[0].id, assigneeName: '张三', priority: '中', status: '已完成', startDate: '2026-05-10', dueDate: '2026-05-25', estimatedHours: 40, actualHours: 35 },
+  { id: uid('TSK'), projectId: mockProjects[0].id, milestoneId: '', name: '性能优化', description: '首屏加载优化，目标LCP<2s', assigneeId: mockEmployees[1].id, assigneeName: '李四', priority: '中', status: '待办', startDate: '2026-07-01', dueDate: '2026-07-20', estimatedHours: 60, actualHours: 0 },
+  { id: uid('TSK'), projectId: mockProjects[1].id, milestoneId: mockMilestones[5].id, name: '数据库设计', description: '设计MES系统数据库模型和表结构', assigneeId: mockEmployees[1].id, assigneeName: '李四', priority: '高', status: '进行中', startDate: '2026-05-20', dueDate: '2026-06-15', estimatedHours: 100, actualHours: 25 },
+  { id: uid('TSK'), projectId: mockProjects[1].id, milestoneId: mockMilestones[5].id, name: '核心接口定义', description: '定义MES核心业务接口规范', assigneeId: mockEmployees[6].id, assigneeName: '吴九', priority: '高', status: '待办', startDate: '2026-06-01', dueDate: '2026-06-30', estimatedHours: 80, actualHours: 0 },
+  { id: uid('TSK'), projectId: mockProjects[1].id, milestoneId: '', name: '测试环境搭建', description: '搭建MES系统测试环境', assigneeId: mockEmployees[7].id, assigneeName: '郑十', priority: '中', status: '已完成', startDate: '2026-05-10', dueDate: '2026-05-20', estimatedHours: 20, actualHours: 18 },
+  { id: uid('TSK'), projectId: mockProjects[3].id, milestoneId: '', name: '碳排放算法设计', description: '设计碳排放计算核心算法', assigneeId: mockEmployees[4].id, assigneeName: '孙七', priority: '高', status: '进行中', startDate: '2026-04-15', dueDate: '2026-06-15', estimatedHours: 120, actualHours: 60 },
+]
+
+export const mockTimeEntries: TimeEntry[] = [
+  { id: uid('TME'), taskId: mockTasks[0].id, taskName: '路由模块重构', projectId: mockProjects[0].id, employeeId: mockEmployees[0].id, employeeName: '张三', date: '2026-05-20', hours: 8, description: '完成路由守卫逻辑编写' },
+  { id: uid('TME'), taskId: mockTasks[0].id, taskName: '路由模块重构', projectId: mockProjects[0].id, employeeId: mockEmployees[0].id, employeeName: '张三', date: '2026-05-21', hours: 7, description: '权限控制模块开发' },
+  { id: uid('TME'), taskId: mockTasks[2].id, taskName: '组件库升级', projectId: mockProjects[0].id, employeeId: mockEmployees[0].id, employeeName: '张三', date: '2026-05-15', hours: 6, description: 'Element Plus版本升级和兼容性修复' },
+  { id: uid('TME'), taskId: mockTasks[4].id, taskName: '数据库设计', projectId: mockProjects[1].id, employeeId: mockEmployees[1].id, employeeName: '李四', date: '2026-05-22', hours: 8, description: 'ER图设计和表结构定义' },
+  { id: uid('TME'), taskId: mockTasks[5].id, taskName: '核心接口定义', projectId: mockProjects[1].id, employeeId: mockEmployees[6].id, employeeName: '吴九', date: '2026-05-25', hours: 6, description: 'RESTful API接口规范编写' },
+  { id: uid('TME'), taskId: mockTasks[7].id, taskName: '碳排放算法设计', projectId: mockProjects[3].id, employeeId: mockEmployees[4].id, employeeName: '孙七', date: '2026-05-23', hours: 8, description: '核心计算公式推导和验证' },
 ]
