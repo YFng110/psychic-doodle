@@ -72,6 +72,25 @@
           <el-menu-item index="/crm/opportunities">销售漏斗</el-menu-item>
           <el-menu-item index="/crm/contracts">合同管理</el-menu-item>
         </el-sub-menu>
+
+        <el-sub-menu index="finance-group">
+          <template #title>
+            <el-icon><Money /></el-icon>
+            <span>财务管理</span>
+          </template>
+          <el-menu-item index="/finance/invoices">发票管理</el-menu-item>
+          <el-menu-item index="/finance/payments">收付款记录</el-menu-item>
+          <el-menu-item index="/finance/expenses">费用报销</el-menu-item>
+          <el-menu-item index="/finance/budgets">预算管理</el-menu-item>
+        </el-sub-menu>
+
+        <el-sub-menu index="project-group">
+          <template #title>
+            <el-icon><Notebook /></el-icon>
+            <span>项目管理</span>
+          </template>
+          <el-menu-item index="/project/list">项目列表</el-menu-item>
+        </el-sub-menu>
       </el-menu>
     </el-aside>
 
@@ -120,7 +139,7 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
   DataAnalysis, User, Clock, Money, Briefcase, Trophy,
-  Fold, Expand, Bell, ArrowDown, OfficeBuilding,
+  Fold, Expand, Bell, ArrowDown, OfficeBuilding, Notebook,
 } from '@element-plus/icons-vue'
 import { useUserStore } from '../stores/user'
 
@@ -144,6 +163,12 @@ const activeMenu = computed(() => {
   if (path.startsWith('/crm/contracts')) return '/crm/contracts'
   if (path.startsWith('/crm/opportunities')) return '/crm/opportunities'
   if (path.startsWith('/crm/customers')) return '/crm/customers'
+  if (path.startsWith('/finance/budgets')) return '/finance/budgets'
+  if (path.startsWith('/finance/expenses')) return '/finance/expenses'
+  if (path.startsWith('/finance/payments')) return '/finance/payments'
+  if (path.startsWith('/finance/invoices')) return '/finance/invoices'
+  if (path.startsWith('/project/list')) return '/project/list'
+  if (path.startsWith('/project/')) return '/project/list'
   return '/'
 })
 
