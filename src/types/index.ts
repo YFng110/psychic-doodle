@@ -179,3 +179,116 @@ export interface Contract {
   status: '草稿' | '待审批' | '已签约' | '已到期' | '已终止'
   signedAt: string
 }
+
+// === 财务管理模块 ===
+
+export interface Invoice {
+  id: string
+  type: '应收' | '应付'
+  customerId: string
+  customerName: string
+  supplierName: string
+  invoiceNumber: string
+  amount: number
+  taxRate: number
+  taxAmount: number
+  totalAmount: number
+  currency: 'CNY' | 'USD' | 'EUR' | 'JPY'
+  issueDate: string
+  dueDate: string
+  status: '草稿' | '已开具' | '已发送' | '已收款' | '已逾期' | '已付款'
+  notes: string
+}
+
+export interface Payment {
+  id: string
+  invoiceId: string
+  invoiceNumber: string
+  customerId: string
+  customerName: string
+  amount: number
+  paymentDate: string
+  paymentMethod: '银行转账' | '现金' | '支付宝' | '微信' | '其他'
+  currency: string
+  exchangeRate: number
+  notes: string
+}
+
+export interface ExpenseReport {
+  id: string
+  employeeId: string
+  employeeName: string
+  type: '差旅' | '招待' | '办公' | '其他'
+  amount: number
+  date: string
+  description: string
+  status: '待审批' | '已通过' | '已拒绝'
+  approverId: string
+  approverName: string
+  approvedAt: string
+}
+
+export interface Budget {
+  id: string
+  year: string
+  department: string
+  category: '部门预算' | '项目预算'
+  projectId: string
+  projectName: string
+  totalAmount: number
+  usedAmount: number
+}
+
+// === 项目管理模块 ===
+
+export interface Project {
+  id: string
+  name: string
+  description: string
+  customerId: string
+  customerName: string
+  managerId: string
+  managerName: string
+  members: string[]
+  memberNames: string[]
+  startDate: string
+  endDate: string
+  budget: number
+  status: '筹备中' | '进行中' | '已完成' | '已暂停' | '已取消'
+}
+
+export interface Milestone {
+  id: string
+  projectId: string
+  name: string
+  deadline: string
+  status: '待开始' | '进行中' | '已完成'
+}
+
+export interface Task {
+  id: string
+  projectId: string
+  milestoneId: string
+  name: string
+  description: string
+  assigneeId: string
+  assigneeName: string
+  priority: '高' | '中' | '低'
+  status: '待办' | '进行中' | '已完成' | '已关闭'
+  startDate: string
+  dueDate: string
+  estimatedHours: number
+  actualHours: number
+}
+
+export interface TimeEntry {
+  id: string
+  taskId: string
+  taskName: string
+  projectId: string
+  employeeId: string
+  employeeName: string
+  date: string
+  hours: number
+  description: string
+}
