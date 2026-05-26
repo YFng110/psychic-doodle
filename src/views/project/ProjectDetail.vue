@@ -220,7 +220,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useProjectStore } from '../../stores/project'
 import { useEmployeeStore } from '../../stores/employee'
-import type { Project, Milestone, Task, TimeEntry } from '../../types'
+import type { Milestone, Task, TimeEntry } from '../../types'
 
 const route = useRoute()
 const router = useRouter()
