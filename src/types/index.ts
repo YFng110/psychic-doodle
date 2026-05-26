@@ -107,3 +107,75 @@ export interface PerformanceReview {
   reviewerName: string
   status: '待填写' | '待审核' | '已完成'
 }
+
+// === CRM 模块 ===
+
+export interface Customer {
+  id: string
+  name: string
+  industry: string
+  size: string
+  contactPerson: string
+  phone: string
+  email: string
+  address: string
+  tags: string[]
+  source: '官网' | '推荐' | '展会' | '其他'
+  level: 'A' | 'B' | 'C' | 'D'
+  ownerId: string
+  ownerName: string
+  status: '潜在' | '意向' | '合作中' | '已流失'
+  createdAt: string
+}
+
+export interface Contact {
+  id: string
+  customerId: string
+  name: string
+  title: string
+  phone: string
+  email: string
+  wechat: string
+  isPrimary: boolean
+}
+
+export interface FollowUp {
+  id: string
+  customerId: string
+  contactId: string
+  contactName: string
+  type: '电话' | '拜访' | '邮件' | '微信' | '其他'
+  content: string
+  nextPlan: string
+  createdAt: string
+  createdBy: string
+  createdByName: string
+}
+
+export interface Opportunity {
+  id: string
+  customerId: string
+  customerName: string
+  name: string
+  product: string
+  amount: number
+  stage: '初步接触' | '需求分析' | '方案报价' | '商务谈判' | '已成交' | '已丢单'
+  probability: number
+  expectedCloseDate: string
+  ownerId: string
+  ownerName: string
+  createdAt: string
+}
+
+export interface Contract {
+  id: string
+  customerId: string
+  customerName: string
+  opportunityId: string
+  name: string
+  amount: number
+  startDate: string
+  endDate: string
+  status: '草稿' | '待审批' | '已签约' | '已到期' | '已终止'
+  signedAt: string
+}
