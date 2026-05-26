@@ -35,11 +35,13 @@
           </template>
         </el-table-column>
         <el-table-column prop="createdAt" label="创建时间" width="110" />
-        <el-table-column label="操作" width="180" fixed="right">
+        <el-table-column label="操作" width="210" fixed="right">
           <template #default="{ row }">
-            <el-button size="small" @click="router.push('/crm/customers/' + row.id)">详情</el-button>
-            <el-button size="small" @click="handleEdit(row)">编辑</el-button>
-            <el-button size="small" type="danger" @click="handleDelete(row)">删除</el-button>
+            <div class="action-btns">
+              <el-button size="small" @click="router.push('/crm/customers/' + row.id)">详情</el-button>
+              <el-button size="small" @click="handleEdit(row)">编辑</el-button>
+              <el-button size="small" type="danger" @click="handleDelete(row)">删除</el-button>
+            </div>
           </template>
         </el-table-column>
       </el-table>
@@ -157,4 +159,5 @@ function handleSubmit() {
 <style scoped>
 .toolbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
 .filters { display: flex; gap: 10px; flex-wrap: wrap; }
+.action-btns { display: flex; gap: 6px; white-space: nowrap; }
 </style>
