@@ -17,10 +17,12 @@
             <el-tag :type="row.status === '已完成' ? 'success' : row.status === '已取消' ? 'danger' : 'warning'" size="small">{{ row.status }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="120">
+        <el-table-column label="操作" width="150">
           <template #default="{ row }">
-            <el-button v-if="row.status === '待面试'" size="small" type="success" @click="handleComplete(row)">完成</el-button>
-            <el-button v-if="row.status === '待面试'" size="small" type="danger" @click="handleCancel(row)">取消</el-button>
+            <div class="action-btns" v-if="row.status === '待面试'">
+              <el-button size="small" type="success" @click="handleComplete(row)">完成</el-button>
+              <el-button size="small" type="danger" @click="handleCancel(row)">取消</el-button>
+            </div>
           </template>
         </el-table-column>
       </el-table>
@@ -83,4 +85,5 @@ function handleCancel(iv: Interview) { store.updateInterview(iv.id, { status: '�
 <style scoped>
 .toolbar { display: flex; justify-content: space-between; align-items: center; }
 .toolbar h3 { margin: 0; }
+.action-btns { display: flex; gap: 6px; white-space: nowrap; }
 </style>
