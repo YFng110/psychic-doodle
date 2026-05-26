@@ -62,6 +62,16 @@
           <el-menu-item index="/performance/kpi">KPI 设定</el-menu-item>
           <el-menu-item index="/performance/review">考核列表</el-menu-item>
         </el-sub-menu>
+
+        <el-sub-menu index="crm-group">
+          <template #title>
+            <el-icon><OfficeBuilding /></el-icon>
+            <span>CRM 客户管理</span>
+          </template>
+          <el-menu-item index="/crm/customers">客户列表</el-menu-item>
+          <el-menu-item index="/crm/opportunities">销售漏斗</el-menu-item>
+          <el-menu-item index="/crm/contracts">合同管理</el-menu-item>
+        </el-sub-menu>
       </el-menu>
     </el-aside>
 
@@ -110,7 +120,7 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
   DataAnalysis, User, Clock, Money, Briefcase, Trophy,
-  Fold, Expand, Bell, ArrowDown,
+  Fold, Expand, Bell, ArrowDown, OfficeBuilding,
 } from '@element-plus/icons-vue'
 import { useUserStore } from '../stores/user'
 
@@ -131,6 +141,9 @@ const activeMenu = computed(() => {
   if (path.startsWith('/recruitment')) return '/recruitment'
   if (path.startsWith('/performance/kpi')) return '/performance/kpi'
   if (path.startsWith('/performance/review')) return '/performance/review'
+  if (path.startsWith('/crm/contracts')) return '/crm/contracts'
+  if (path.startsWith('/crm/opportunities')) return '/crm/opportunities'
+  if (path.startsWith('/crm/customers')) return '/crm/customers'
   return '/'
 })
 
