@@ -1,4 +1,4 @@
-import type { Employee, AttendanceRecord, LeaveRequest, SalaryRecord, Job, Candidate, Interview, PerformanceReview, KpiItem } from '../types'
+import type { Employee, AttendanceRecord, LeaveRequest, SalaryRecord, Job, Candidate, Interview, PerformanceReview, KpiItem, Customer, Contact, FollowUp, Opportunity, Contract } from '../types'
 
 let idCounter = 0
 function uid(prefix: string): string {
@@ -138,3 +138,49 @@ export function generatePerformance(): PerformanceReview[] {
   }
   return reviews
 }
+
+// === CRM Mock 数据 ===
+
+export const mockCustomers: Customer[] = [
+  { id: uid('CUS'), name: '字节科技', industry: '互联网', size: '500-1000人', contactPerson: '李明', phone: '13900003001', email: 'liming@bytech.com', address: '北京市海淀区中关村大街1号', tags: ['VIP', '技术合作'], source: '官网', level: 'A', ownerId: mockEmployees[2].id, ownerName: '王五', status: '合作中', createdAt: '2026-01-15' },
+  { id: uid('CUS'), name: '星辰金融', industry: '金融', size: '200-500人', contactPerson: '王磊', phone: '13900003002', email: 'wanglei@starfin.com', address: '上海市浦东新区陆家嘴金融城', tags: ['金融科技'], source: '推荐', level: 'A', ownerId: mockEmployees[3].id, ownerName: '赵六', status: '意向', createdAt: '2026-03-20' },
+  { id: uid('CUS'), name: '绿源环保', industry: '环保', size: '50-200人', contactPerson: '张华', phone: '13900003003', email: 'zhanghua@greenep.com', address: '广州市天河区体育西路', tags: [], source: '展会', level: 'B', ownerId: mockEmployees[4].id, ownerName: '孙七', status: '潜在', createdAt: '2026-04-10' },
+  { id: uid('CUS'), name: '智慧教育', industry: '教育', size: '100-500人', contactPerson: '陈芳', phone: '13900003004', email: 'chenfang@wisedu.com', address: '深圳市南山区科技园', tags: ['教育科技', '长期合作'], source: '官网', level: 'A', ownerId: mockEmployees[0].id, ownerName: '张三', status: '合作中', createdAt: '2025-11-01' },
+  { id: uid('CUS'), name: '通达物流', industry: '物流', size: '500-1000人', contactPerson: '刘强', phone: '13900003005', email: 'liuqiang@tongda.com', address: '成都市武侯区天府大道', tags: [], source: '其他', level: 'C', ownerId: mockEmployees[5].id, ownerName: '周八', status: '潜在', createdAt: '2026-05-01' },
+  { id: uid('CUS'), name: '云帆医疗', industry: '医疗', size: '200-500人', contactPerson: '赵敏', phone: '13900003006', email: 'zhaomin@yunfan.com', address: '杭州市西湖区文三路', tags: ['医疗健康'], source: '推荐', level: 'B', ownerId: mockEmployees[1].id, ownerName: '李四', status: '已流失', createdAt: '2025-08-15' },
+  { id: uid('CUS'), name: '创想制造', industry: '制造业', size: '1000人以上', contactPerson: '孙鹏', phone: '13900003007', email: 'sunpeng@chuangxiang.com', address: '武汉市东湖高新区', tags: ['智能制造', 'VIP'], source: '展会', level: 'A', ownerId: mockEmployees[6].id, ownerName: '吴九', status: '意向', createdAt: '2026-02-28' },
+  { id: uid('CUS'), name: '乐享零售', industry: '零售', size: '50-200人', contactPerson: '周婷', phone: '13900003008', email: 'zhouting@lexiang.com', address: '南京市鼓楼区新街口', tags: [], source: '官网', level: 'C', ownerId: mockEmployees[8].id, ownerName: '冯十一', status: '潜在', createdAt: '2026-05-10' },
+]
+
+export const mockContacts: Contact[] = [
+  { id: uid('CON'), customerId: mockCustomers[0].id, name: '李明', title: '技术总监', phone: '13900003001', email: 'liming@bytech.com', wechat: 'liming_wx', isPrimary: true },
+  { id: uid('CON'), customerId: mockCustomers[0].id, name: '王芳', title: '采购经理', phone: '13900003011', email: 'wangfang@bytech.com', wechat: '', isPrimary: false },
+  { id: uid('CON'), customerId: mockCustomers[1].id, name: '王磊', title: 'CTO', phone: '13900003002', email: 'wanglei@starfin.com', wechat: 'wanglei_wx', isPrimary: true },
+  { id: uid('CON'), customerId: mockCustomers[3].id, name: '陈芳', title: 'CEO', phone: '13900003004', email: 'chenfang@wisedu.com', wechat: 'chenfang_wx', isPrimary: true },
+  { id: uid('CON'), customerId: mockCustomers[6].id, name: '孙鹏', title: 'IT经理', phone: '13900003007', email: 'sunpeng@chuangxiang.com', wechat: '', isPrimary: true },
+  { id: uid('CON'), customerId: mockCustomers[6].id, name: '黄丽', title: '财务总监', phone: '13900003012', email: 'huangli@chuangxiang.com', wechat: 'huangli_wx', isPrimary: false },
+]
+
+export const mockFollowUps: FollowUp[] = [
+  { id: uid('FLW'), customerId: mockCustomers[0].id, contactId: mockContacts[0].id, contactName: '李明', type: '拜访', content: '到客户公司进行了产品演示和技术方案沟通，客户对前端架构能力表示认可。', nextPlan: '下周三前发送详细报价方案', createdAt: '2026-05-20', createdBy: mockEmployees[2].id, createdByName: '王五' },
+  { id: uid('FLW'), customerId: mockCustomers[0].id, contactId: mockContacts[0].id, contactName: '李明', type: '电话', content: '跟进报价反馈，客户希望增加运维服务条款。', nextPlan: '修改方案后重新发送', createdAt: '2026-05-24', createdBy: mockEmployees[2].id, createdByName: '王五' },
+  { id: uid('FLW'), customerId: mockCustomers[1].id, contactId: mockContacts[2].id, contactName: '王磊', type: '微信', content: '发送了产品白皮书和案例集，客户技术团队在评估。', nextPlan: '等待客户反馈后安排技术交流会', createdAt: '2026-05-18', createdBy: mockEmployees[3].id, createdByName: '赵六' },
+  { id: uid('FLW'), customerId: mockCustomers[3].id, contactId: mockContacts[3].id, contactName: '陈芳', type: '邮件', content: '发送了Q2产品更新说明和新功能演示邀请。', nextPlan: '下月安排线上演示', createdAt: '2026-05-15', createdBy: mockEmployees[0].id, createdByName: '张三' },
+  { id: uid('FLW'), customerId: mockCustomers[6].id, contactId: mockContacts[4].id, contactName: '孙鹏', type: '拜访', content: '参观了客户工厂，了解了智能制造产线需求，初步谈了合作框架。', nextPlan: '整理需求文档并发给客户确认', createdAt: '2026-05-22', createdBy: mockEmployees[6].id, createdByName: '吴九' },
+]
+
+export const mockOpportunities: Opportunity[] = [
+  { id: uid('OPP'), customerId: mockCustomers[0].id, customerName: '字节科技', name: '前端架构升级项目', product: '技术咨询服务', amount: 300000, stage: '商务谈判', probability: 70, expectedCloseDate: '2026-07-15', ownerId: mockEmployees[2].id, ownerName: '王五', createdAt: '2026-03-01' },
+  { id: uid('OPP'), customerId: mockCustomers[1].id, customerName: '星辰金融', name: '风控系统开发', product: '定制开发', amount: 500000, stage: '需求分析', probability: 40, expectedCloseDate: '2026-09-30', ownerId: mockEmployees[3].id, ownerName: '赵六', createdAt: '2026-04-15' },
+  { id: uid('OPP'), customerId: mockCustomers[3].id, customerName: '智慧教育', name: '在线教育平台二期', product: 'SaaS平台', amount: 200000, stage: '已成交', probability: 100, expectedCloseDate: '2026-05-01', ownerId: mockEmployees[0].id, ownerName: '张三', createdAt: '2026-02-01' },
+  { id: uid('OPP'), customerId: mockCustomers[6].id, customerName: '创想制造', name: 'MES系统集成', product: '系统集成', amount: 800000, stage: '方案报价', probability: 55, expectedCloseDate: '2026-10-01', ownerId: mockEmployees[6].id, ownerName: '吴九', createdAt: '2026-05-10' },
+  { id: uid('OPP'), customerId: mockCustomers[2].id, customerName: '绿源环保', name: '碳排放管理系统', product: 'SaaS平台', amount: 150000, stage: '初步接触', probability: 15, expectedCloseDate: '2026-12-31', ownerId: mockEmployees[4].id, ownerName: '孙七', createdAt: '2026-05-15' },
+  { id: uid('OPP'), customerId: mockCustomers[5].id, customerName: '云帆医疗', name: 'HIS系统升级', product: '系统集成', amount: 600000, stage: '已丢单', probability: 0, expectedCloseDate: '2026-03-01', ownerId: mockEmployees[1].id, ownerName: '李四', createdAt: '2025-12-01' },
+]
+
+export const mockContracts: Contract[] = [
+  { id: uid('CTR'), customerId: mockCustomers[3].id, customerName: '智慧教育', opportunityId: mockOpportunities[2].id, name: '在线教育平台二期开发合同', amount: 200000, startDate: '2026-05-01', endDate: '2026-11-01', status: '已签约', signedAt: '2026-04-28' },
+  { id: uid('CTR'), customerId: mockCustomers[0].id, customerName: '字节科技', opportunityId: mockOpportunities[0].id, name: '前端架构升级服务合同', amount: 300000, startDate: '2026-07-01', endDate: '2027-01-01', status: '待审批', signedAt: '' },
+  { id: uid('CTR'), customerId: mockCustomers[6].id, customerName: '创想制造', opportunityId: '', name: '智能制造咨询服务合同', amount: 400000, startDate: '2026-06-01', endDate: '2026-12-01', status: '草稿', signedAt: '' },
+  { id: uid('CTR'), customerId: mockCustomers[5].id, customerName: '云帆医疗', opportunityId: mockOpportunities[5].id, name: 'HIS系统升级合同', amount: 600000, startDate: '2025-12-01', endDate: '2026-06-01', status: '已到期', signedAt: '2025-11-15' },
+]
