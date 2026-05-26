@@ -111,8 +111,8 @@ export const mockCandidates: Candidate[] = [
 
 export const mockInterviews: Interview[] = [
   { id: uid('INT'), candidateId: mockCandidates[0].id, candidateName: '刘甲', jobTitle: '高级前端工程师', interviewer: '张三', date: '2026-05-20', time: '14:00', location: '会议室A', result: '', status: '已完成' },
-  { id: uid('INT'), candidateId: mockCandidates[1].id, jobTitle: '高级前端工程师', interviewer: '张三', date: '2026-05-28', time: '10:00', location: '会议室A', result: '', status: '待面试' },
-  { id: uid('INT'), candidateId: mockCandidates[2].id, jobTitle: '产品经理', interviewer: '王五', date: '2026-05-18', time: '15:00', location: '会议室B', result: '通过', status: '已完成' },
+  { id: uid('INT'), candidateId: mockCandidates[1].id, candidateName: '黄乙', jobTitle: '高级前端工程师', interviewer: '张三', date: '2026-05-28', time: '10:00', location: '会议室A', result: '', status: '待面试' },
+  { id: uid('INT'), candidateId: mockCandidates[2].id, candidateName: '林丙', jobTitle: '产品经理', interviewer: '王五', date: '2026-05-18', time: '15:00', location: '会议室B', result: '通过', status: '已完成' },
 ]
 
 export function generatePerformance(): PerformanceReview[] {
